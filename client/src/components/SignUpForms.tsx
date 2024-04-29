@@ -2,16 +2,12 @@
 import { useFormik } from "formik";
 import { HelperText } from "./HelperText";
 import { RightArrow } from "./icons";
+import toast, { Toaster } from "react-hot-toast";
 import robustValidation from "./ValidationSchema";
-
-type formValues = {
-  emailOrPhoneNumber: string;
-  password: string;
-  confirmPassword: string;
-};
+import { SubWord } from "./index";
 
 export const SignUpForms = () => {
-  const formik = useFormik<formValues>({
+  const formik = useFormik({
     initialValues: {
       emailOrPhoneNumber: "",
       password: "",
@@ -20,12 +16,15 @@ export const SignUpForms = () => {
     validationSchema: robustValidation,
     onSubmit: (values) => {
       console.log(values, "this is valid submission");
+      toast.success(`you're getting nailed bro 😉`, {
+        duration: 17000,
+      });
     },
   });
 
   const { errors, touched } = formik;
 
-  const checkingValidInputs = () => {
+  const checkingEmailorPhone = () => {
     if (errors.emailOrPhoneNumber && touched.emailOrPhoneNumber) {
       return <HelperText error={formik.errors.emailOrPhoneNumber} />;
     } else {
@@ -67,15 +66,9 @@ export const SignUpForms = () => {
       </h3>
 
       <div className="flex flex-col w-[100%] gap-[8px]">
-        <h5
-          data-testid="check-email-number"
-          color="#121316"
-          className="text-base non-italic font-semibold leading-5 flex flex-start w-[100%]"
-        >
-          Your email or phoneNumber
-        </h5>
-        {checkingValidInputs()}
+        <SubWord props={"Your email or phoneNumber"} />
         <input
+          datatest-id="email-phoneNumber"
           style={{ borderColor: "#D6D8DB", backgroundColor: "#F7F7F8" }}
           className="flex items-center p-[8px] self-stretch rounded-lg border-solid border"
           name="emailOrPhoneNumber"
@@ -85,17 +78,13 @@ export const SignUpForms = () => {
           placeholder="Enter email or phone number"
           type="text"
         />
+        {checkingEmailorPhone()}
       </div>
 
       <div className="flex flex-col w-[100%] gap-[8px]">
-        <h5
-          data-testid="password"
-          color="#121316"
-          className="text-base non-italic font-semibold leading-5 flex flex-start w-[100%]"
-        >
-          password
-        </h5>
+        <SubWord props={"password"} />
         <input
+          datatest-id="password"
           name="password"
           value={formik.values.password}
           onChange={formik.handleChange}
@@ -109,14 +98,9 @@ export const SignUpForms = () => {
       </div>
 
       <div className="flex flex-col w-[100%] gap-[8px]">
-        <h5
-          data-testid="confirmPassword"
-          color="#121316"
-          className="text-base non-italic font-semibold leading-5 flex flex-start w-[100%]"
-        >
-          repeat password
-        </h5>
+        <SubWord props={"repeat your password"} />
         <input
+          datatest-id="confirmPassword"
           name="confirmPassword"
           value={formik.values.confirmPassword}
           onBlur={formik.handleBlur}
@@ -130,6 +114,8 @@ export const SignUpForms = () => {
       </div>
 
       <button
+        id="submit-button"
+        data-testid="submit-button"
         onClick={() => {
           formik.handleSubmit();
         }}
@@ -151,6 +137,7 @@ export const SignUpForms = () => {
         </p>
         <RightArrow />
       </button>
+      <Toaster position="top-center" />
     </div>
   );
 };

@@ -5,7 +5,7 @@ const robustValidation = yup.object({
     .string()
     .test(
       "is-email-or-phoneNumber",
-      "Утас эсвэл имэйл хаяг байх ёстой",
+      "must be valid email or phoneNumber",
       function (value) {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
         const isValidEmail = emailRegex.test(value as string);
