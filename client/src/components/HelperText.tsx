@@ -11,5 +11,5 @@ export const HelperText = ({ error }: any) => {
   //   return () => clearTimeout(testTime);
   // }, [error]);
 
-  return <div data-testid="submit-button" className="text-red-400">{error}</div>;
+  return <div datatest-id="error-message" className="text-red-400">{error}</div>;
 };
