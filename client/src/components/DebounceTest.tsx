@@ -1,34 +1,41 @@
 "use client";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import "./style.css";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-type user = {
-  id: number;
-  avatar: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-};
-
-export const DebounceTest = () => {
-  const [users, setUsers] = useState([]);
+export const DebounceTest = ({ users }: { users: any }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const [searchedValue, setSearchedValue] = useState("");
 
-  const test = async () => {
-    try {
-      const response = await fetch("https://reqres.in/api/users/");
-      const convertToJson = await response.json();
-      setUsers(convertToJson.data);
-    } catch (error) {
-      console.error(error, "cannot fetch data");
-    }
+  const router = useRouter();
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
+
+  const createUrl = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams]
+  );
+
+  const manageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchedValue(event.target.value);
+    setTimeout(() => {
+      router.push(pathName + "?" + createUrl("searchFor", event.target.value));
+    }, 2000);
   };
 
   const handleFocusSate = () => setIsFocused((preV) => !preV);
 
-  useEffect(() => {
-    test();
-  }, []);
+  const searchedValueParams = searchParams.get("searchFor");
+
+  const filteredUser = users.filter((el:any) => {
+    return el.firs_name
+      .toLowerCase()
+      .includes(searchedValueParams?.toLocaleLowerCase());
+  });
 
   return (
     <div className="flex flex-col gap-5">
@@ -40,6 +47,8 @@ export const DebounceTest = () => {
           borderRadius: "5px",
           marginTop: "20px",
         }}
+        value={searchedValue}
+        onChange={manageChange}
         className={isFocused ? "focused" : ""}
         onFocus={handleFocusSate}
         onBlur={handleFocusSate}
@@ -47,16 +56,15 @@ export const DebounceTest = () => {
         placeholder="type name"
       />
       <div className="flex gap-[20px] flex-wrap">
-        {users.length !== 0 &&
-          users.map((el: user) => {
-            return (
-              <div key={el?.id}>
-                <strong>{el.first_name}</strong>
-                <p>{el.email}</p>
-                <img key={el.avatar} src={el.avatar} />
-              </div>
-            );
-          })}
+        {filteredUser.map((el: any) => {
+          return (
+            <div key={el?.id}>
+              <strong>{el.first_name}</strong>
+              <p>{el.email}</p>
+              <img key={el.avatar} src={el.avatar} />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
