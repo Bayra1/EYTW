@@ -1,5 +1,7 @@
 body {
-  background-color: aqua;
+  /* background-image: linear-gradient(#FFDB01, #0E197D); */
+  /* background-image: linear-gradient(to bottom right, #a28089, #0E1F40); */
+  background-color: #a28089;
 }
 
 #cube {
@@ -8,7 +10,10 @@ body {
   position: relative;
   transform-style: preserve-3d;
   transform: rotateX(-45deg) rotateY(30deg);
-  transition: transform 3s;
+  transition: transform 3s;  
+  border-radius: 50%;
+  /* background-color: aquamarine; */
+  perspective: 100%;
 }
 
 .side {
@@ -31,7 +36,7 @@ body {
 }
 
 #right {
-  transform: translateX(100px) rotateY(90deg);
+  transform: translateX(100px) rotateY(90deg);  
 }
 #left {
   transform: translateX(-100px) rotateY(-90deg);

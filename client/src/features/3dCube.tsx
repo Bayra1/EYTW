@@ -1,10 +1,10 @@
 import "../components/style.css";
 export const Three_D_Cube = () => {
   return (
-    <div className="container">
+    <div className="container infin">
       <div id="cube">
         <div className="side" id="front">
-          Front
+          front
         </div>
         <div className="side" id="back">
           Back
@@ -21,8 +21,7 @@ export const Three_D_Cube = () => {
         <div className="side" id="bottom">
           Bottom
         </div>
-      </div>
-      {/* <button className="mt-[150px] ml-[150px] border p-[10px]">click me </button> */}
+      </div>      
     </div>
   );
 };
