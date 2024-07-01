@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useEffect, useState } from "react";
 
 export const HelperText = ({ error }: any) => {
@@ -11,5 +11,9 @@ export const HelperText = ({ error }: any) => {
   //   return () => clearTimeout(testTime);
   // }, [error]);
 
-  return <div datatest-id="error-message" className="text-red-400">{error}</div>;
+  return (
+    <div datatest-id="error-message" className="text-red-400">
+      {error}
+    </div>
+  );
 };

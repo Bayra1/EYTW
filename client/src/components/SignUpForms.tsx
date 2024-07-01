@@ -7,7 +7,6 @@ import { SubWord } from "./index";
 import robustValidation from "./ValidationSchema";
 
 export const SignUpForms = () => {
-  
   const formik = useFormik({
     initialValues: {
       emailOrPhoneNumber: "",
@@ -15,10 +14,10 @@ export const SignUpForms = () => {
       confirmPassword: "",
     },
     validationSchema: robustValidation,
-    onSubmit: (values) => {    
+    onSubmit: (values) => {
       console.log(values, "values");
       toast.success(`you're getting nailed bro 😉`, {
-        duration: 7000,                
+        duration: 7000,
       });
     },
   });

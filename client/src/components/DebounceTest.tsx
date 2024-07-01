@@ -31,7 +31,7 @@ export const DebounceTest = ({ users }: { users: any }) => {
 
   const searchedValueParams = searchParams.get("searchFor");
 
-  const filteredUser = users.filter((el:any) => {
+  const filteredUser = users.filter((el: any) => {
     return el.firs_name
       .toLowerCase()
       .includes(searchedValueParams?.toLocaleLowerCase());
