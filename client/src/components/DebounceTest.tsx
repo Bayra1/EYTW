@@ -1,7 +1,7 @@
 "use client";
 import { ChangeEvent, useCallback, useState } from "react";
-import "./style.css";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import "./style.css";
 
 export const DebounceTest = ({ users }: { users: any }) => {
   const [isFocused, setIsFocused] = useState(false);

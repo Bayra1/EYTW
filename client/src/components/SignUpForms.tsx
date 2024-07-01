@@ -3,8 +3,8 @@ import { useFormik } from "formik";
 import { HelperText } from "./HelperText";
 import { RightArrow } from "./icons";
 import toast, { Toaster } from "react-hot-toast";
-import robustValidation from "./ValidationSchema";
 import { SubWord } from "./index";
+import robustValidation from "./ValidationSchema";
 
 export const SignUpForms = () => {
   
