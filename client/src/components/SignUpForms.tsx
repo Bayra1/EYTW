@@ -15,7 +15,7 @@ export const SignUpForms = () => {
     },
     validationSchema: robustValidation,
     onSubmit: (values) => {
-      console.log(values, "values");
+      // console.log(values, "values");
       toast.success(`you're getting nailed bro 😉`, {
         duration: 7000,
       });
