@@ -1,6 +1,6 @@
 describe("template spec", () => {
   beforeEach(() => cy.visit("http://localhost:3000"));
-  
+
   it("1-> should verify if there are some texts exist before user interact with forms", () => {
     cy.get('[data-testid="big-title"]')
       .should("exist")
